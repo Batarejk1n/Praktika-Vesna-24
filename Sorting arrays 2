@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <clocale>
+
+//Это функция, которая принимает число и проверяет, равна ли вторая цифра с конца нулю.
+bool hasSecondLastDigitZero(int num) {
+    num /= 10; // Удаляем последнюю цифру
+    return num % 10 == 0; // Проверяем вторую с конца цифру
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int size = 10;
+    std::vector<int> numbers;
+
+    srand(time(0)); // Инициализация генератора случайных чисел
+
+    // Заполнение массива случайными числами от 0 до 1000
+    for (int i = 0; i < size; i++) {
+        numbers.push_back(rand() % 1001); // Генерация случайных чисел от 0 до 1000
+    } 
+
+    // Отбор чисел, у которых вторая цифра с конца равна нулю
+    std::cout << "Числа, у которых вторая цифра с конца равна нулю:\n";
+    for (int num : numbers) { //Перебирает числа в векторе.
+        if (hasSecondLastDigitZero(num)) {  //Проверяет, удовлетворяет ли число условию второй цифры с конца равной нулю.
+            std::cout << num << " ";
+        }
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
