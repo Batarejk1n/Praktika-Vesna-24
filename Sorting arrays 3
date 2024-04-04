@@ -1,0 +1,63 @@
+#include <iostream>
+#include <algorithm>
+#include <ctime>
+
+using namespace std;
+
+// Функция с алгоритмом двоичного поиска
+/*
+ int Search_Binary(int arr[], int left, int right, int key) -
+ это функция, которая реализует алгоритм двоичного поиска в отсортированном массиве arr в 
+ диапазоне от индекса left до индекса right для ключа key.
+ Если ключ найден, функция возвращает его индекс, иначе возвращает -1.
+*/
+int Search_Binary(int arr[], int left, int right, int key) {      
+    while (left <= right) {
+        int midd = left + (right - left) / 2;
+
+        if (arr[midd] == key) {
+            return midd;
+        }
+        else if (arr[midd] < key) {
+            left = midd + 1;
+        }
+        else {
+            right = midd - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    const int size = 10;
+    int numbers[size];
+    srand(time(0));
+
+    cout << "Случайный массив чисел от 0 до 100:\n";
+    for (int i = 0; i < size; i++) {
+        numbers[i] = rand() % 101;
+    }
+
+    sort(numbers, numbers + size); // Cортировка массива numbers перед выполнением бинарного поиска.
+
+    for (int i = 0; i < size; i++) {
+        cout << numbers[i] << " ";
+    }
+
+    int key;
+    cout << "\n\nВведите любое число: "; //Ввод пользователем числа key для поиска.
+    cin >> key;
+    
+    //Вызов функции Search_Binary() для выполнения бинарного поиска ключа key в отсортированном массиве.
+    int index = Search_Binary(numbers, 0, size - 1, key);
+
+    if (index != -1) {
+        cout << "Указанное число находится в ячейке с индексом: " << index << "\n\n";
+    }
+    else {
+        cout << "В массиве нет такого числа!\n\n";
+    }
+
+    return 0;
+}
