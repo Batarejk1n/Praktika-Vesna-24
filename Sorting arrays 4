@@ -1,0 +1,43 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <functional>
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int size = 10; //Объявление константы size равной 10
+    std::vector<int> numbers; //Cоздание вектора numbers для хранения случайных чисел
+    srand(time(0)); // Инициализация генератора случайных чисел
+
+    // Цикл для заполнения вектора numbers случайными числами от 0 до 100.
+    for (int i = 0; i < size; i++) {
+        numbers.push_back(rand() % 101); 
+    }
+
+    // Вывод исходного массива
+    std::cout << "Исходный массив:\n";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    //Определение переменной half как половины размера массива
+    int half = size / 2;
+
+    // Сортировка первой половины по возрастанию
+    std::sort(numbers.begin(), numbers.begin() + half);
+
+    // Сортировка второй половины по убыванию
+    std::sort(numbers.begin() + half, numbers.end(), std::greater<int>());
+
+    // Вывод отсортированного массива
+    std::cout << "Отсортированный массив:\n";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
