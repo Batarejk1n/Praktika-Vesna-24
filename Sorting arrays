@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+#include <clocale>
+#include <ctime>
+
+bool compareByLastDigit(int a, int b) {
+    return a % 10 < b % 10;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int size = 10;
+    int numbers[size];
+    srand(time(0)); // Инициализация генератора случайных чисел
+
+    std::cout << "Случайный массив чисел от 0 до 100:\n";
+    for (int i = 0; i < size; i++) {
+        numbers[i] = rand() % 101; // Генерация случайного числа от 0 до 100
+        std::cout << numbers[i] << " ";
+    }
+
+    // Сортировка массива по последней цифре
+    std::sort(std::begin(numbers), std::end(numbers), compareByLastDigit);
+
+    // Вывод отсортированного массива
+    std::cout << "\nМассив, отсортированный по последней цифре:\n";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
