@@ -1,0 +1,45 @@
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    /*    
+    Объявление вектора numbers для хранения сгенерированных
+    чисел и хэш-таблицы freqMap для подсчета частоты повторений чисел.
+    */
+    const int size = 10;                       
+    std::vector<int> numbers;                  
+    std::unordered_map<int, int> freqMap;      
+
+    srand(time(0));
+
+    // Генерация и вывод сгенерированных чисел
+    std::cout << "Сгенерированные числа:\n";
+    for (int i = 0; i < size; i++) {
+        int num = rand() % 101;
+        numbers.push_back(num);
+        std::cout << num << " ";
+    }
+    std::cout << "\n\n";
+
+    // Цикл для подсчета частоты повторений каждого числа в векторе numbers с помощью хэш-таблицы freqMap.
+    for (int num : numbers) {
+        freqMap[num]++;
+    }
+
+    // Вывод чисел, которые повторяются более одного раза
+    std::cout << "Числа, которые повторяются более одного раза:\n";
+
+    //Цикл для перебора пар ключ-значение в хэш-таблице freqMap и вывод чисел, которые повторяются более одного раза.
+    for (const auto& pair : freqMap) {
+        if (pair.second > 1) {
+            std::cout << pair.first << " ";
+        }
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
